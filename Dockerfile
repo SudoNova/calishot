@@ -8,4 +8,4 @@ RUN		apk update && apk upgrade &&\
 		git clone --depth 1 --single-branch --branch $BRANCH --no-tags $REPO &&\
 		ln -s $(which python3) /usr/bin/python
 WORKDIR	/root/calishot/calishot
-ONBUILD	python calishot.py scan-shodan && python calishot.py scrape-shodan
+#ONBUILD	python calishot.py scan-shodan && python calishot.py scrape-shodan
