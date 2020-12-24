@@ -283,6 +283,9 @@ def get_calibres_from_shodan(query='calibre', offset=1, limit=10, max_page=0, di
             print("Unable to contact Shodan", url)
             print (e.response)
             print (r.text)
+            # Stop if credits are over.
+            if 'Insufficient query credits' in r.text:
+                break
             print (e)
             print (r.status_code)
             continue
