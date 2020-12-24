@@ -124,7 +124,7 @@ def check_calibre_site(site):
         print (e)
         return ret
 
-    print("Total count=",r.json()["total_num"])
+#    print("Total count=",r.json()["total_num"])
 
     ret['type']="calibre-server"    
     status=ret['status']='online'
