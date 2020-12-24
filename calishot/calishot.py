@@ -1,3 +1,4 @@
+import os
 import fire
 import requests
 from pathlib import Path
@@ -257,7 +258,7 @@ def map_site_from_shodan_api(site):
     return ret
 
 
-def get_calibres_from_shodan(query='calibre', offset=1, limit=10, max_page=0, dir='.', key="WtGlBj51TTAAOK7rDe1WCQBxTyfJlRzF"):
+def get_calibres_from_shodan(query='calibre', offset=1, limit=10, max_page=0, dir='.', key=os.environ.get("SHODAN_API_KEY")):
     # TODO: Error counter on Shodan
     # query='"Server: calibre" http.status%3A200'
     # TODO: handle request exception correctly and make a function : https://stackoverflow.com/questions/16511337/correct-way-to-try-except-using-python-requests-module
