@@ -44,6 +44,7 @@ def init_sites_db(dir="."):
     if not "sites" in db.table_names():
         db["sites"].create({
         "uuid": str,
+        "ip": str,
         "url": str,
         "type": str,
         "hostnames": str,
@@ -310,8 +311,8 @@ def get_calibres_from_shodan(query='calibre', offset=1, limit=10, max_page=0, di
         #     continue
 
         sites=[]
-        for u in j_sites:         
-            d_site=map_site(u)
+        for u in j_sites:
+            d_site=map_site_from_shodan_api(u)
             if(d_site):
                 print(d_site)
                 sites.append(d_site)
