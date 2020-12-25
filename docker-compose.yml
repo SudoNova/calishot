@@ -1,0 +1,33 @@
+version: "3.8"
+x-commons: &common
+    deploy:
+        restart_policy:
+            condition: on-failure
+            delay: "5s"
+services:
+    calishot:
+        image: calishot:latest
+        ports:
+          - target: 8001
+            published: 8001
+            mode: host
+        volumes:
+          # Please notice that any change to your provided files persists to the actual one
+          # Always make backups, or add read_only: true to every bind
+          - type: bind
+            source: ./index.db # Change it to match your calishot database
+            target: /data/index.db
+          # Uncomment below lines, if you want to provide custom metadata or config for datasette
+          #- type: bind
+          #  source: ./metadata.json 
+          #  target: /data/metadata.json
+          #- type: bind
+          #  source: ./settings.json
+          #  target: /data/settings.json
+        environment:
+          - SHODAN_API_KEY=whatever # Fill this if you want to scrape shodan from this container
+        build:
+          args:
+          - REPO=https://github.com/SudoNova/calishot
+          - BRANCH=dev 
+        <<: *common
