@@ -1,0 +1,6 @@
+{
+	"sql_time_limit_ms":10000,
+	"allow_download":"off",
+	"max_returned_rows":2000,
+	"num_sql_threads":10
+}

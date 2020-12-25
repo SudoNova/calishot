@@ -11,7 +11,6 @@ RUN			cd /root &&\
 			apk cache clean; pip cache purge; rm -rf /root/.cache; rm -rf /var/cache/*
 WORKDIR		/root/calishot/calishot
 #ONBUILD	python calishot.py scan-shodan && python calishot.py scrape-shodan
-ENTRYPOINT	datasette
-CMD			serve index.db --config sql_time_limit_ms:10000 --config allow_download:off \
-			--config max_returned_rows:2000  --config num_sql_threads:10 --metadata metadata.json
+ENTRYPOINT	sh
+CMD			datasette serve /data/
 EXPOSE		8001
