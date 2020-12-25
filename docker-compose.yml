@@ -8,8 +8,8 @@ services:
     calishot:
         image: calishot:latest
         ports:
-          - target: 8001
-            published: 8001
+          - target: 80
+            published: 80
             mode: host
         volumes:
           # Please notice that any change to your provided files persists to the actual one

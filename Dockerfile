@@ -13,5 +13,5 @@ RUN			cd /tmp && mkdir /data &&\
 			rm -rf /root/.cache && rm -rf /var/cache/* &&  rm -rf /tmp/*
 WORKDIR		/calishot
 #ONBUILD	python calishot.py scan-shodan && python calishot.py scrape-shodan
-CMD			datasette serve --host 0.0.0.0 /data/
-EXPOSE		8001
+CMD			datasette serve --host 0.0.0.0 --port 80 /data/
+EXPOSE		80
