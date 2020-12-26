@@ -118,13 +118,8 @@ def check_calibre_site(site):
         ret['status']='Unknown Error'
         print (e)
         return ret
-    except :
-        print("Wazza !!!!")
-        ret['status']='Critical Error'
-        print (e)
-        return ret
 
-#    print("Total count=",r.json()["total_num"])
+    print("Total count=",r.json()["total_num"])
 
     ret['type']="calibre-server"    
     status=ret['status']='online'
@@ -328,7 +323,7 @@ def get_calibres_from_shodan(query='calibre', offset=1, limit=10, max_page=0, di
         if (offset>=total):
             break
 
-    print("Total count=",r.json()["total_num"])
+#    print("Total count=",r.json()["total_num"])
 
     ret['type']="calibre-server"    
     status=ret['status']='online'
@@ -337,33 +332,9 @@ def get_calibres_from_shodan(query='calibre', offset=1, limit=10, max_page=0, di
 
     return ret
 
-
-#  open -a "Google Chrome" --args --user-data-dir=browser_cookie3 
-def scrape_calibres_from_shodan():
-    cj = browser_cookie3.firefox(domain_name='www.shodan.io')
-    session = requests.Session()
-    # session.headers.update({'User-Agent': 'Chrome/79.0.3945.117'})
-    user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
-    headers = {'User-Agent': user_agent}
-    # url="https://www.shodan.io/search?query=%22Server%3A+calibre%22+http.status%3A200+country%3A%22FR%22"
-    # url="https://github.com/"
-    # url="https://www.shodan.io/search?query=%22Server%3A+calibre%22+http.status%3A200+country%3A%22FR%22"
-    url="https://www.shodan.io/"
-    r = session.get(url,headers=headers, cookies=cj)
-    url="https://www.shodan.io/search?query=%22Server%3A+calibre%22+http.status%3A200"
-    r = session.get(url,headers=headers, cookies=cj)
-    # url="https://www.shodan.io/search?query=%22Server%3A+calibre%22+http.status%3A200+country%3A%22FR%22"
-    soup=BeautifulSoup(r.text, 'lxml')
-    # print ( soup.prettify())
-    for link in soup.findAll('a'):
-        href=str(link.get('href'))
-        print(href)
-
-
 if __name__ == "__main__":
     fire.Fire({
         "scan-shodan": get_calibres_from_shodan,
-        "scrape-shodan":scrape_calibres_from_shodan,
         "import": import_urls_from_file,
         "check":check_calibre_list,
         "check-site":check_calibre_site,
